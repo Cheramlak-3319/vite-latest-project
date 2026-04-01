@@ -1,59 +1,86 @@
-import React, { useState } from 'react'
-import {FaCamera} from 'react-icons/fa'
-import ImageFile from '../assets/channels4_banner.jpg'
-import ImageFile1 from '../assets/new.jpg'
-import Tabs from './Tabs'
+import { FaCamera } from 'react-icons/fa';
+import Tabs from './Tabs';
 
 const Profile = () => {
-    const [baseUrl, setBaseUrl] = useState(ImageFile);
-    const [profileUrl, setProfileUrl] = useState(ImageFile1);
-  
-    const handleImageChange = (event: any) =>{
-        const file = event.target.files[0];
-
-        if(file){
-            setBaseUrl(URL.createObjectURL(file));
-        }
+  const handleBannerUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log('Banner uploaded:', file.name);
+      // You can preview or upload the file here
     }
+  };
 
-    const handleProfileChange = (event:any) => {
-      const file = event.target.files[0];
-
-      if(file){
-        setProfileUrl(URL.createObjectURL(file));
-      }
+  const handleProfileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log('Profile image uploaded:', file.name);
+      // Handle upload or preview logic
     }
+  };
 
-return (
-    <div className='w-[94%] ml-[5rem] relative'>
-      <div className='relative'>
-        <img src={baseUrl} alt="banner" className="w-full h-60 object-cover"/>
-        <button className="absolute top-2 right-2 bg-gray-800 p-2 rounded-full hover:bg-gray-300 hover:text-gray-500 text-white">
-            <label htmlFor="bannerUrl">
-                <FaCamera className="cursor-pointer" size={24}/>
-            </label>
-            <input type="file" id='banner-upload' accept='image/*' className='hidden' onChange={handleImageChange}/>
+  return (
+    <div className="w-[94%] ml-[5rem] relative">
+      {/* Banner Section */}
+      <div className="relative w-full h-48 bg-gray-300 rounded-xl overflow-hidden">
+        <img
+          src="https://via.placeholder.com/1200x300"
+          alt="Banner"
+          className="w-full h-full object-cover"
+        />
+        <input
+          type="file"
+          id="bannerUrl"
+          accept="image/*"
+          className="hidden"
+          onChange={handleBannerUpload}
+        />
+        <button className="absolute top-3 right-3 bg-gray-800 p-2 rounded-full text-white hover:bg-gray-600">
+          <label htmlFor="bannerUrl" className="cursor-pointer">
+            <FaCamera size={20} />
+          </label>
         </button>
       </div>
 
-      <div className='ml-4 mt-[2rem] items-center flex'>
-        <img src={profileUrl} alt="profile picture" className='w-40 h-40 rounded-full object-cover border-white relative'/>
-        <button className='absolute mt-[10rem] ml-[4rem] z-10 bg-gray-800 hover:bg-gray-600 rounded-full text-white p-2 '>
-          <label htmlFor="profile-upload" className='cursor-pointer'>
-            <FaCamera size={24}/>
-          </label>
-          <input type="file" id="profile-uploaded" className='hidden' accept='image/*' onChange={handleProfileChange}/>
-        </button>
-        <div className='ml-4 mt-4'>
-          <h1 className='text-2xl font-bold ml-[4rem]'>Cheramalk</h1>
-          <p className='ml-[4rem]'>2M views</p>
-          <p className='mt-2 ml-[4rem]'>This is my YouTube Channal and You Will see My Change</p>
-          <button className='ml-[4rem] bg-red-700 text-white py-2 rounded-full hover:bg-black mt-4 px-3'>Sebscribe</button>
+      {/* Profile Section */}
+      <div className="relative flex items-center mt-[-3rem] ml-6">
+        <div className="relative">
+          <img
+            src="https://via.placeholder.com/120"
+            alt="Profile"
+            className="w-28 h-28 rounded-full border-4 border-white object-cover"
+          />
+          <input
+            type="file"
+            id="profile-upload"
+            accept="image/*"
+            className="hidden"
+            onChange={handleProfileUpload}
+          />
+          <button className="absolute bottom-1 right-1 bg-gray-800 p-2 rounded-full text-white hover:bg-gray-600">
+            <label htmlFor="profile-upload" className="cursor-pointer">
+              <FaCamera size={16} />
+            </label>
+          </button>
+        </div>
+
+        <div className="ml-6 mt-6">
+          <h1 className="text-2xl font-bold">Cheramlak</h1>
+          <p className="text-gray-600">2M views</p>
+          <p className="mt-2 text-gray-700 max-w-md">
+            This is my YouTube Channel — watch my progress and growth!
+          </p>
+          <button className="bg-red-700 text-white py-2 px-4 rounded-full hover:bg-black mt-4">
+            Subscribe
+          </button>
         </div>
       </div>
-      <Tabs />
-    </div>
-  )
-}
 
-export default Profile
+      {/* Tabs Section */}
+      <div className="mt-8">
+        <Tabs />
+      </div>
+    </div>
+  );
+};
+
+export default Profile;

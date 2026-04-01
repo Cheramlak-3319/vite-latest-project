@@ -1,5 +1,4 @@
-import { FaCog, FaUser, FaWallet } from "react-icons/fa";
-import Card from "./Card";
+import { FaCog, FaWallet } from "react-icons/fa";
 import Setting from "./Setting";
 import Wallet from "./Wallet";
 import { useState } from "react";
@@ -7,14 +6,6 @@ import { FaCableCar } from "react-icons/fa6";
 import About from "./About";
 
 const tabsData = [
-  {
-    id: "profile",
-    icon: <FaUser className="text-xl" />,
-    label: "Profile",
-    content: (
-      <Card />
-    ),
-  },
   {
     id: "wallet",
     icon: <FaWallet className="text-xl" />,
@@ -38,7 +29,7 @@ const tabsData = [
 const Tabs = () => {
     const [activeTab,setActiveTab] = useState(tabsData[0].id)
   return (
-    <div className="mt-[3rem] p-4">
+    <div className="mt-12 p-4">
       <div className="flex border-b border-gray-200">
         {tabsData.map(tab =>
             <button key={tab.id} className={`flex text-center py-2 px-4 font-medium text-sm  ${activeTab === tab.id? 'border-2' : 'text-gray-600'}`} onClick={()=>setActiveTab(tab.id)}>
